@@ -1,0 +1,20 @@
+<div class="input-group mb-3">
+  <button type="button"
+          (click)="cambiarValor(-5)"
+          [ngClass]="btnColor">
+    <i class="fa fa-minus"></i>
+  </button>
+
+  <input type="number"
+         class="form-control"
+         [ngClass]="{'is-invalid': progreso>100 || progreso<0}"
+         placeholder="Ingrese Progreso"
+         [(ngModel)]="progreso"
+         (ngModelChange)="ingresarValor($event)">
+
+  <button type="button"
+          [ngClass]="btnColor"
+          (click)="cambiarValor(+5)">
+    <i class="fa fa-plus"></i>
+  </button>
+</div>

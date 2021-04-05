@@ -1,31 +1,29 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { Grafica1Component } from './pages/grafica1/grafica1.component';
-import { PagesComponent } from './pages/pages.component';
-import { Pages404Component } from './pages/pages404/pages404.component';
-import { ProgressComponent } from './pages/progress/progress.component';
+
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { PagesRoutingModule } from './pages/pages-routing.module';
+//import { PagesRoutingModule } from './pages/pages.routing';
+
+import { Pages404Component } from './pages404/pages404.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: PagesComponent,
-    children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'progress', component: ProgressComponent },
-      { path: 'graficas1', component: Grafica1Component },
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    ],
+    path: 'dashboard',
+    loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+
   { path: '**', component: Pages404Component },
+ /*  { path: '', redirectTo: '/dashboard', pathMatch: 'full' }, */
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    PagesRoutingModule,
+    AuthRoutingModule
+  ],
   exports: [RouterModule],
 })
+
 export class AppRoutingModule {}

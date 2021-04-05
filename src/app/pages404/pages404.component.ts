@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pages404.component.css' ]
 })
 
+
 export class Pages404Component  {
 AnioActual=new Date().getFullYear()
 
